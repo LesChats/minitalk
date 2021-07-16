@@ -6,14 +6,13 @@
 /*   By: abaudot <abaudot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/15 00:23:54 by abaudot           #+#    #+#             */
-/*   Updated: 2021/07/15 00:24:08 by abaudot          ###   ########.fr       */
+/*   Updated: 2021/07/16 18:50:29 by aime             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-
 int	ft_atoi(const char *str)
 {
-	int				res;
+	int	res;
 
 	res = 0;
 	while (*str)
@@ -24,7 +23,7 @@ int	ft_atoi(const char *str)
 	return (res);
 }
 
-char ft_isnum(char *str)
+char	ft_isnum(char *str)
 {
 	while (*str)
 	{
@@ -33,4 +32,14 @@ char ft_isnum(char *str)
 		++str;
 	}
 	return (1);
+}
+
+int	ft_strlen(char *str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i])
+		++i;
+	return (i);
 }

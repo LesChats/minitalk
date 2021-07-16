@@ -6,7 +6,7 @@
 #    By: abaudot <abaudot@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/07/15 00:28:20 by abaudot           #+#    #+#              #
-#    Updated: 2021/07/15 01:05:25 by abaudot          ###   ########.fr        #
+#    Updated: 2021/07/16 18:51:33 by aime             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,7 +28,6 @@ INC = -I includes
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror
 
-
 # ----- Colors -----
 BLACK:="\033[1;30m"
 RED:="\033[1;31m"
@@ -39,7 +38,6 @@ WHITE:="\033[1;37m"
 EOC:="\033[0;0m"
 BLUE:="\033[34;1m"
 # ==================
-
 
 # ------ Debugger ----
 ifeq ($(DEBUG), 1)
