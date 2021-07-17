@@ -1,0 +1,19 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    readme                                             :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: abaudot <marvin@42.fr>                     +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2021/07/17 02:51:20 by abaudot           #+#    #+#              #
+#    Updated: 2021/07/17 02:54:19 by abaudot          ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
+For the tests you juste need:
+
+1)	to lauch a server and get is PID
+2)	to type:	ARG=`cat tests\my_test`
+3)	to use:		./clien Server_pid "$ARG"
+
+have fun

@@ -6,7 +6,7 @@
 /*   By: abaudot <abaudot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/15 00:25:35 by abaudot           #+#    #+#             */
-/*   Updated: 2021/07/16 18:06:02 by aime             ###   ########.fr       */
+/*   Updated: 2021/07/17 02:04:31 by abaudot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,5 +22,7 @@
 # define BUFFER_SIZE 10000
 
 int		ft_atoi(const char *str);
-char	ft_isnum(char *str);
+char	ft_isnum(const char *str);
+int		ft_strlen(const char *str);
+void	ft_putunbr(unsigned int n);
 #endif

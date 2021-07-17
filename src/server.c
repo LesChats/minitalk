@@ -6,7 +6,7 @@
 /*   By: abaudot <abaudot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/14 23:16:15 by abaudot           #+#    #+#             */
-/*   Updated: 2021/07/16 18:55:25 by aime             ###   ########.fr       */
+/*   Updated: 2021/07/17 02:55:50 by abaudot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ static void	buffer_(const char c)
 **			proprely recived
 ** 53-60:	make space for the next bit and send signal for the next bits
 */
-static void	handler(int signum, siginfo_t *info, void * context)
+static void	handler(int signum, siginfo_t *info, void *context)
 {
 	static uint8_t	c = 0x0;
 	static int		bit = 0;
@@ -76,15 +76,14 @@ int	main(void)
 {
 	struct sigaction	sa_signal;	
 
-	printf("\033[34;1mPID:\033[1;31m\t%d\033[0;0m\n", getpid());
+	printf("\033[34;1mPID:\t\033[1;31m[%d]\033[0;0m\n", getpid());
 	sigemptyset(&sa_signal.sa_mask);
 	sa_signal.sa_flags = SA_SIGINFO;
 	sa_signal.sa_handler = NULL;
 	sa_signal.sa_sigaction = handler;
 	sigaction(SIGUSR1, &sa_signal, NULL);
 	sigaction(SIGUSR2, &sa_signal, NULL);
-	while(1)
+	while (1)
 		pause();
 	return (0);
 }
-
