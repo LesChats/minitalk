@@ -6,7 +6,7 @@
 /*   By: abaudot <abaudot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/14 23:16:15 by abaudot           #+#    #+#             */
-/*   Updated: 2021/07/25 12:56:12 by abaudot          ###   ########.fr       */
+/*   Updated: 2021/07/19 12:47:53 by abaudot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,9 @@ static void	buffer_(const char c)
 	if (!c || i == BUFFER_SIZE)
 	{
 		write(1, buffer, i);
-		i = 0;
 		if (!c)
 			write(1, "\n", 1);
+		i = 0;
 	}
 	else
 	{
@@ -58,10 +58,13 @@ static void	handler(int signum, siginfo_t *info, void *context)
 		bit = 0;
 		buffer_(c);
 		c = 0x0;
+		kill(info->si_pid, SIGUSR1);
 	}
 	else
+	{
 		c <<= 1;
-	kill(info->si_pid, SIGUSR1);
+		kill(info->si_pid, SIGUSR2);
+	}
 }
 
 /*

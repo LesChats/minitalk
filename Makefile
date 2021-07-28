@@ -6,22 +6,34 @@
 #    By: abaudot <abaudot@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/07/15 00:28:20 by abaudot           #+#    #+#              #
-#    Updated: 2021/07/16 18:51:33 by aime             ###   ########.fr        #
+#    Updated: 2021/07/25 13:39:10 by abaudot          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME_CLIENT = client
 NAME_SERVER = server
+NAME_CLIENT_B = client_bonus
+NAME_SERVER_B = server_bonus
+
+
 OBJS_DIR = obj
 
 PRECOMPILE = mkdir -p $(dir $(OBJS_DIR)/$*)
 
 SRC_CLIENT = src/client.c\
 			 src/strlib.c
+
+SRC_CLIENT_BONUS =	src/client_bonus.c\
+			 		src/strlib.c
+
 OBJ_C = $(patsubst src/%.c, $(OBJS_DIR)/%.o, $(SRC_CLIENT))
+OBJ_CB = $(patsubst src/%.c, $(OBJS_DIR)/%.o, $(SRC_CLIENT_BONUS))
 
 SRC_SERVER = src/server.c
+SRC_SERVER_BONUS = src/server_bonus.c
+
 OBJ_S = $(patsubst src/%.c, $(OBJS_DIR)/%.o, $(SRC_SERVER))
+OBJ_SB = $(patsubst src/%.c, $(OBJS_DIR)/%.o, $(SRC_SERVER_BONUS))
 
 INC = -I includes
 
@@ -75,7 +87,14 @@ fclean: clean
 	@rm -f $(NAME_CLIENT)
 	@echo $(RED)"client removed"$(EOC)
 
-bonus : all
+bonus : $(NAME_CLIENT_B) $(NAME_SERVER_B)
+
+$(NAME_SERVER_B): $(OBJ_SB)
+	@$(CC) -o server $^ $(CFLAGS)
+	@echo $(GREEN)"*** server is ready ! ***\n"$(EOC)
+$(NAME_CLIENT_B): $(OBJ_CB)
+	@$(CC) -o client $^ $(CFLAGS)
+	@echo $(GREEN)"*** server is ready ! ***\n"$(EOC)
 
 re: fclean
 	@make all

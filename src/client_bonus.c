@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   client.c                                           :+:      :+:    :+:   */
+/*   client_bonus.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abaudot <abaudot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/14 23:28:44 by abaudot           #+#    #+#             */
-/*   Updated: 2021/07/25 13:48:05 by abaudot          ###   ########.fr       */
+/*   Updated: 2021/07/25 13:08:48 by abaudot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,10 @@ static int	end_of_connection(const pid_t pid)
 	static int	bit = 0;
 
 	if (bit == 8)
+	{
+		write(1, "\n", 1);
 		exit(0);
+	}
 	++bit;
 	kill(pid, SIGUSR2);
 	return (0);
@@ -70,9 +73,16 @@ static int	send_bit(char *s, const pid_t pid)
 */
 static void	handler(int signum, siginfo_t *info, void *context)
 {
+	static unsigned int	count;
+
 	(void)info;
 	(void)context;
-	(void)signum;
+	if (signum == SIGUSR1)
+	{
+		write(1, "\r\033[1;32mRecived: \033[0;0m", 17);
+		ft_putunbr(++count);
+		write(1, " \033[1;33mBytes\033[0;0m", 13);
+	}
 	send_bit(0, 0);
 }
 
@@ -91,6 +101,9 @@ int	main(int ac, char **av)
 	sa_signal.sa_flags = SA_SIGINFO;
 	sa_signal.sa_sigaction = handler;
 	sigaction(SIGUSR1, &sa_signal, NULL);
+	sigaction(SIGUSR2, &sa_signal, NULL);
+	printf("\033[1;34mSending:");
+	printf("\033[1;32m %d \033[1;31mBytes\033[0;0m..\n", ft_strlen(av[2]) + 1);
 	if (send_bit(av[2], ft_atoi(av[1])))
 	{
 		printf("\033[1;31mError:\033[0;0m No Server found\n");
